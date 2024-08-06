@@ -34,7 +34,7 @@ for /l %%i in (1,1,%altura%) do (
 )
 
 rem Controles do jogador
-choice /c wsadex /n /m "Use W,A,S,D para mover, E para colocar bloco, X para sair: "
+choice /c wsadeqx /n /m "Use W,A,S,D para mover, E para colocar bloco, Q para quebrar bloco, X para sair: "
 set "tecla=%errorlevel%"
 
 if %tecla% equ 1 set "direcao=^" & set /a y-=1
@@ -42,7 +42,8 @@ if %tecla% equ 2 set "direcao=<" & set /a x-=1
 if %tecla% equ 3 set "direcao=v" & set /a y+=1
 if %tecla% equ 4 set "direcao=>" & set /a x+=1
 if %tecla% equ 5 set "mapa[%y%,%x%]=X"
-if %tecla% equ 6 exit /b
+if %tecla% equ 6 if "!mapa[%y%,%x%]!" equ "X" set "mapa[%y%,%x%]= "
+if %tecla% equ 7 exit /b
 
 rem Impede que o jogador saia da matriz
 if %x% lss 1 set x=1
